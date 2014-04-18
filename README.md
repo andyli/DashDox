@@ -1,6 +1,11 @@
-DashDox
-=======
+# DashDox
 
 [Haxe](http://haxe.org/) API docset for [Dash](http://kapeli.com/dash).
 
-Install: [click here](dash-feed://http%3A%2F%2Fandyli.github.io%2FDashDox%2Fhaxe.xml)
+## Install
+
+  1. Go to Dash's *Preferences*.
+  2. Switch to *Downloads* tab.
+  3. Click the **+** (Add docset feed) button near the bottom.
+  4. Enter http://andyli.github.io/DashDox/haxe.xml
+  5. Haxe will appear in the list. Press the *Download* button.
