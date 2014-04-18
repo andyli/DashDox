@@ -1,0 +1,6 @@
+-main Main
+-neko Main.n
+-cp src
+-lib hxargs
+-debug
+# -cmd neko Main.n -name Haxe -html-doc /Users/andy/haxelib/dox/git/bin/pages -xml-doc /Users/andy/haxelib/dox/git/bin/xml -icon haxe.png -out . -clean
