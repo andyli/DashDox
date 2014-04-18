@@ -1,0 +1,19 @@
+language: node_js
+
+branches:
+  except:
+    - gh-pages
+
+before_script:
+  - sudo apt-get update
+  - sudo apt-get install python-software-properties -y # for the next command
+  - sudo add-apt-repository ppa:eyecreate/haxe -y
+  - sudo apt-get update
+  - sudo apt-get install haxe -y
+  - mkdir ~/haxelib
+  - haxelib setup ~/haxelib
+  - haxelib install hxargs
+  - haxelib install dox
+
+script:
+  - haxe build.hxml
