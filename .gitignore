@@ -1,3 +1,4 @@
 *.docset
 *.tgz
+out
 Main.n

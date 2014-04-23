@@ -29,5 +29,5 @@ before_script:
 
 script:
   - haxe build.hxml
-  - neko Main.n -name Haxe -html-doc ~/haxelib/dox/git/bin/pages -xml-doc ~/haxelib/dox/git/bin/xml -icon haxe.png -out . -clean
-  - tar -cvzf haxe.tgz Haxe.docset
+  - neko Main.n -name Haxe -html-doc ~/haxelib/dox/git/bin/pages -xml-doc ~/haxelib/dox/git/bin/xml -icon haxe.png -out out -clean
+  - tar -cvzf out/haxe.tgz out/Haxe.docset
