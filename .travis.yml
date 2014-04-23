@@ -1,19 +1,33 @@
-language: node_js
+language: objective-c
 
 branches:
   except:
     - gh-pages
 
-before_script:
-  - sudo apt-get update
-  - sudo apt-get install python-software-properties -y # for the next command
-  - sudo add-apt-repository ppa:eyecreate/haxe -y
-  - sudo apt-get update
-  - sudo apt-get install haxe -y
+install:
+  - brew update
+  - brew install phinze/cask/brew-cask
+  - brew cask install xquartz
+  - brew install haxe
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
-  - haxelib install hxargs
-  - haxelib install dox
+  - haxelib install hxcpp
+  - haxelib install hxjava
+  - haxelib install hxcs
+  - haxelib git hxparse https://github.com/Simn/hxparse.git development src
+  - haxelib git hxtemplo https://github.com/Simn/hxtemplo.git master src
+  - haxelib git hxargs https://github.com/Simn/hxargs.git
+  - haxelib git markdown https://github.com/dpeek/haxe-markdown.git master src
+  - haxelib git dox https://github.com/dpeek/dox.git
+
+before_script:
+  - cd ~/haxelib/dox/git/
+  - haxe run.hxml
+  - haxe gen.hxml
+  - haxe std.hxml
+  - cd $TRAVIS_BUILD_DIR
 
 script:
   - haxe build.hxml
+  - neko Main.n -name Haxe -html-doc ~/haxelib/dox/git/bin/pages -xml-doc ~/haxelib/dox/git/bin/xml -icon haxe.png -out . -clean
+  - tar -cvzf haxe.tgz Haxe.docset
