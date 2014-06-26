@@ -8,7 +8,7 @@ install:
   - brew update
   - brew install phinze/cask/brew-cask
   - brew cask install xquartz
-  - brew install haxe
+  - brew install haxe --HEAD
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
   - haxelib install hxcpp
