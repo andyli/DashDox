@@ -45,6 +45,8 @@ class Main {
 <string>${name}</string>
 <key>isDashDocset</key>
 <true/>
+<key>dashIndexFilePath</key>
+<string>index.html</string>
 <key>isJavaScriptEnabled</key>
 <true/>
 </dict>
