@@ -6,7 +6,7 @@
 
   1. Go to Dash's *Preferences*.
   2. Switch to *Downloads* tab.
-  3. Select *User Contributed*
+  3. Select *User Contributed*.
   4. Find the *Haxe* row and press the *Download* button.
 
 ## Generate the docset
