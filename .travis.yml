@@ -1,5 +1,7 @@
 language: haxe
 
+sudo: false
+
 branches:
   except:
     - gh-pages
