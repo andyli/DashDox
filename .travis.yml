@@ -19,11 +19,10 @@ install:
 
 before_script:
   - cd $DOX_PATH
-  - haxe run.hxml
   - haxe gen.hxml
-  - haxe std.hxml
-  - unzip -o $DOX_PATH/bin/*.zip -d api
+  - haxe run.hxml && haxe std.hxml
   - cd $TRAVIS_BUILD_DIR
+  - unzip -o $DOX_PATH/bin/*.zip -d api
 
 script:
   - haxe build.hxml
