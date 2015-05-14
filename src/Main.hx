@@ -176,16 +176,16 @@ class Main {
 				main.id = id;
 			},
 			"-html-doc" => function(doc:String) {
-				main.htmlDoc = doc;
+				main.htmlDoc = FileSystem.fullPath(doc);
 			},
 			"-xml-doc" => function(doc:String) {
-				main.xmlDoc = doc;
+				main.xmlDoc = FileSystem.fullPath(doc);
 			},
 			"-icon" => function(icon:String) {
-				main.icon = icon;
+				main.icon = FileSystem.fullPath(icon);
 			},
 			"-out" => function(out:String) {
-				main.out = out;
+				main.out = FileSystem.fullPath(out);
 			},
 			"-clean" => function() {
 				clean = true;
