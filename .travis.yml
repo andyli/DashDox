@@ -1,16 +1,10 @@
-language: objective-c
+language: haxe
 
 branches:
   except:
     - gh-pages
 
 install:
-  - brew update
-  - brew install phinze/cask/brew-cask
-  - brew cask install xquartz
-  - brew install haxe --HEAD
-  - mkdir ~/haxelib
-  - haxelib setup ~/haxelib
   - haxelib install hxcpp
   - haxelib install hxjava
   - haxelib install hxcs
@@ -19,15 +13,17 @@ install:
   - haxelib git hxargs https://github.com/Simn/hxargs.git
   - haxelib git markdown https://github.com/dpeek/haxe-markdown.git master src
   - haxelib git dox https://github.com/dpeek/dox.git
+  - DOX_PATH=$(haxelib path dox | head -1)
 
 before_script:
-  - cd ~/haxelib/dox/git/
+  - cd $DOX_PATH
   - haxe run.hxml
   - haxe gen.hxml
   - haxe std.hxml
+  - unzip -o $DOX_PATH/bin/*.zip -d api
   - cd $TRAVIS_BUILD_DIR
 
 script:
   - haxe build.hxml
-  - neko Main.n -name Haxe -html-doc ~/haxelib/dox/git/bin/pages -xml-doc ~/haxelib/dox/git/bin/xml -icon haxe.png -out out -clean
+  - neko Main.n -name Haxe -html-doc api -xml-doc $DOX_PATH/bin/xml -icon haxe.png -out out -clean
   - tar -cvzf out/haxe.tgz out/Haxe.docset

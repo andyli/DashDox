@@ -1,4 +1,5 @@
 *.docset
 *.tgz
 out
+api
 Main.n

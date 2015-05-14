@@ -29,7 +29,9 @@ class Main {
 	}
 
 	function copyHTMLDoc():Void {
-		Sys.command("cp", ["-r", htmlDoc + "/*", '${getDocsetPath()}/Contents/Resources/Documents/']);
+		for (f in FileSystem.readDirectory(htmlDoc)) {
+			Sys.command("cp", ["-r", haxe.io.Path.join([htmlDoc, f]), '${getDocsetPath()}/Contents/Resources/Documents/']);
+		}
 	}
 
 	function createInfoPlist():Void {
@@ -51,15 +53,15 @@ class Main {
 <true/>
 </dict>
 </plist>';
-		File.saveContent('${getDocsetPath()}/Contents/Info.plist',content);
+		File.saveContent(haxe.io.Path.join([getDocsetPath(), "Contents", "Info.plist"]), content);
 	}
 
 	function copyIcon():Void {
-		Sys.command("cp", [icon, '${getDocsetPath()}/icon.png']);
+		Sys.command("cp", [icon, haxe.io.Path.join([getDocsetPath(), "icon.png"])]);
 	}
 
 	function createSQLite():Void {
-		var db = Sqlite.open('${getDocsetPath()}/Contents/Resources/docSet.dsidx');
+		var db = Sqlite.open(haxe.io.Path.join([getDocsetPath(), "Contents", "Resources", "docSet.dsidx"]));
 		db.request("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT);");
 		db.request("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);");
 
@@ -92,7 +94,7 @@ class Main {
 		if (FileSystem.isDirectory(xmlDoc)) {
 			for (file in FileSystem.readDirectory(xmlDoc)) {
 				if (!file.endsWith(".xml")) continue;
-				parseFile('${xmlDoc}/${file}');
+				parseFile(haxe.io.Path.join([xmlDoc, file]));
 			}
 		} else {
 			parseFile(xmlDoc);
@@ -102,7 +104,7 @@ class Main {
 			switch (t) {
 				case TPackage(name, full, subs):
 					var path = fullToPath(full == '' ? 'index' : full + '.index');
-					if (FileSystem.exists(htmlDoc + "/" + path)) {
+					if (FileSystem.exists(haxe.io.Path.join([htmlDoc, path]))) {
 						db.request('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (${db.quote(full)}, "Package", ${db.quote(path)});');
 					}
 					subs.iter(processTree);
@@ -110,13 +112,13 @@ class Main {
 					var path = fullToPath(t.path);
 					var name = nameFromFull(t.path);
 					var type = t.isInterface ? "Interface" : "Class";
-					if (FileSystem.exists(htmlDoc + "/" + path)) {
+					if (FileSystem.exists(haxe.io.Path.join([htmlDoc, path]))) {
 						db.request('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (${db.quote(name)}, "$type", ${db.quote(path)});');
 					}
 				case TEnumdecl(t):
 					var path = fullToPath(t.path);
 					var name = nameFromFull(t.path);
-					if (FileSystem.exists(htmlDoc + "/" + path)) {
+					if (FileSystem.exists(haxe.io.Path.join([htmlDoc, path]))) {
 						db.request('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (${db.quote(name)}, "Enum", ${db.quote(path)});');
 
 						for (c in t.constructors) {
@@ -127,13 +129,13 @@ class Main {
 				case TTypedecl(t):
 					var path = fullToPath(t.path);
 					var name = nameFromFull(t.path);
-					if (FileSystem.exists(htmlDoc + "/" + path)) {
+					if (FileSystem.exists(haxe.io.Path.join([htmlDoc, path]))) {
 						db.request('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (${db.quote(name)}, "Type", ${db.quote(path)});');
 					}
 				case TAbstractdecl(t):
 					var path = fullToPath(t.path);
 					var name = nameFromFull(t.path);
-					if (FileSystem.exists(htmlDoc + "/" + path)) {
+					if (FileSystem.exists(haxe.io.Path.join([htmlDoc, path]))) {
 						db.request('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (${db.quote(name)}, "Type", ${db.quote(path)});');
 					}
 			}
