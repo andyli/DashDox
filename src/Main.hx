@@ -51,6 +51,10 @@ class Main {
 <string>index.html</string>
 <key>isJavaScriptEnabled</key>
 <true/>
+<key>DashDocSetNameShorteningFamily</key>
+<string>python</string>
+<key>DashDocSetDeclaredInStyle</key>
+<string>originalName</string>
 </dict>
 </plist>';
 		File.saveContent(haxe.io.Path.join([getDocsetPath(), "Contents", "Info.plist"]), content);
@@ -162,7 +166,7 @@ class Main {
 	}
 
 	function nameFromFull(full:String):String {
-		return full.substring(full.lastIndexOf(".") + 1);
+		return full;//.substring(full.lastIndexOf(".") + 1);
 	}
 
 	static function main():Void {
