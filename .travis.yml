@@ -27,4 +27,4 @@ before_script:
 script:
   - haxe build.hxml
   - neko Main.n -name Haxe -html-doc api -xml-doc $DOX_PATH/bin/xml -icon haxe.png -out out -clean
-  - tar -czf out/haxe.tgz out/Haxe.docset
+  - tar -czf out/haxe.tgz -C out Haxe.docset
