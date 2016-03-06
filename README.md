@@ -1,13 +1,19 @@
 # DashDox
 
-[Haxe](http://haxe.org/) API docset for [Dash](http://kapeli.com/dash).
+[Haxe](http://haxe.org/) API docset for [Dash](http://kapeli.com/dash) / [Zeal](https://zealdocs.org/).
 
 ## Install to Dash
 
   1. Go to Dash's *Preferences*.
-  2. Switch to *Downloads* tab.
+  2. Switch to the *Downloads* tab.
   3. Select *User Contributed*.
   4. Find the *Haxe* row and press the *Download* button.
+
+## Install to Zeal
+
+  1. *File* -> *Options*.
+  2. Select the *Docsets* tab.
+  3. Click the *Add feed* button and enter this feed URL: http://andyli.github.io/DashDox/haxe.xml
 
 ## Generate the docset
 
