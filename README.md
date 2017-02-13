@@ -12,14 +12,15 @@
 
 ## Install to Zeal
 
-  1. *File* -> *Options*.
-  2. Select the *Docsets* tab.
-  3. Click the *Add feed* button and enter this feed URL: http://andyli.github.io/DashDox/haxe.xml
+  1. *Tools* -> *Docsets*.
+  2. Click the *Add feed* button.
+  3. Enter this feed URL: http://andyli.github.io/DashDox/haxe.xml
+  4. Close. (It may tell you to wait, if so, wait a moment then click the close button again.)
 
 ## Generate the docset
 
   1. Install [Haxe](http://haxe.org/).
-  2. Build the haxe documentation by following the instruction of [Dox](https://github.com/dpeek/dox).
+  2. Build the haxe documentation by following the instruction of [Dox](https://github.com/HaxeFoundation/dox).
   3. Clone this repo: `git clone https://github.com/andyli/DashDox.git`.
   4. Install the dependency: `haxelib install build.hxml`.
   5. Build the generation program: `haxe build.hxml`
