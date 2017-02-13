@@ -6,26 +6,23 @@ branches:
   except:
     - gh-pages
 
+env:
+  global:
+    - HAXE_PATH=$HOME/haxe_source
+
 install:
   - haxelib install hxcpp
   - haxelib install hxjava
   - haxelib install hxcs
-  - haxelib git hxparse https://github.com/Simn/hxparse.git development src
-  - haxelib git hxtemplo https://github.com/Simn/hxtemplo.git master src
-  - haxelib git hxargs https://github.com/Simn/hxargs.git
-  - haxelib git markdown https://github.com/dpeek/haxe-markdown.git master src
-  - haxelib git dox https://github.com/dpeek/dox.git
-  - DOX_PATH=$(haxelib path dox | head -1)
-
-before_script:
-  - cd $DOX_PATH
-  - haxe gen.hxml
-  - haxe run.hxml && haxe std.hxml
-  - cd $TRAVIS_BUILD_DIR
-  - unzip -o $DOX_PATH/bin/*.zip -d api
+  - git clone --depth 1 --branch $TRAVIS_HAXE_VERSION https://github.com/HaxeFoundation/haxe.git $HAXE_PATH
+  - pushd $HAXE_PATH
+  -   make install_dox
+  -   make package_doc
+  - popd
+  - unzip -o $HAXE_PATH/out/*_doc.zip -d api
 
 script:
   - haxe build.hxml
-  - neko Main.n -name Haxe -html-doc api -xml-doc $DOX_PATH/bin/xml -icon haxe.png -out out -clean
+  - neko Main.n -name Haxe -html-doc api -xml-doc $(haxelib path dox | head -1)/bin/xml -icon haxe.png -out out -clean
   - tar -czf out/haxe.tgz -C out Haxe.docset
   - openssl sha1 out/haxe.tgz
