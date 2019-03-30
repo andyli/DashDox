@@ -1,7 +1,7 @@
 # DashDox
 [![Build Status](https://travis-ci.org/andyli/DashDox.svg?branch=master)](https://travis-ci.org/andyli/DashDox)
 
-[Haxe](http://haxe.org/) API docset for [Dash](http://kapeli.com/dash) / [Zeal](https://zealdocs.org/).
+[Haxe](https://haxe.org/) API docset for [Dash](https://kapeli.com/dash) / [Zeal](https://zealdocs.org/).
 
 ## Install to Dash
 
@@ -14,12 +14,12 @@
 
   1. *Tools* -> *Docsets*.
   2. Click the *Add feed* button.
-  3. Enter this feed URL: http://andyli.github.io/DashDox/haxe.xml
+  3. Enter this feed URL: https://andyli.github.io/DashDox/haxe.xml
   4. Close. (It may tell you to wait, if so, wait a moment then click the close button again.)
 
 ## Generate the docset
 
-  1. Install [Haxe](http://haxe.org/).
+  1. Install [Haxe](https://haxe.org/).
   2. Build the haxe documentation by following the instruction of [Dox](https://github.com/HaxeFoundation/dox).
   3. Clone this repo: `git clone https://github.com/andyli/DashDox.git`.
   4. Install the dependency: `haxelib install build.hxml`.
@@ -28,7 +28,7 @@
 
 <p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license"
-     href="http://creativecommons.org/publicdomain/zero/1.0/">
+     href="https://creativecommons.org/publicdomain/zero/1.0/">
     <img src="https://licensebuttons.net/p/zero/1.0/80x15.png" style="border-style: none;" alt="CC0" />
   </a>
   To the extent possible under law,
