@@ -1,5 +1,7 @@
 *.docset
 *.tgz
 out
-api
+xml
+html
 Main.n
+.haxelib
