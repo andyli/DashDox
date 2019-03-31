@@ -1,5 +1,7 @@
 .haxelib
 *.docset
+*.tgz
+*.xml
 api
 html
 xml
