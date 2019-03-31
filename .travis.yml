@@ -2,29 +2,15 @@ language: haxe
 
 sudo: false
 
-branches:
-  except:
-    - gh-pages
-
-env:
-  global:
-    - HAXE_DOC_VERSION=3.4.7
-    - API_HAXE_ORG_PATH="$HOME/api.haxe.org"
-
 install:
-  - haxelib install hxcpp
-  - haxelib install hxjava
-  - haxelib install hxcs
-  - haxelib install build.hxml --always
-  - git clone https://github.com/HaxeFoundation/api.haxe.org.git "$API_HAXE_ORG_PATH"
-  - pushd "$API_HAXE_ORG_PATH"
-  - cp -r "xml/$HAXE_DOC_VERSION" "$TRAVIS_BUILD_DIR/xml"
-  - git checkout gh-pages
-  - cp -r "v/$HAXE_DOC_VERSION" "$TRAVIS_BUILD_DIR/html"
-  - popd
+  - make .haxelib xml html
 
 script:
-  - haxe build.hxml
-  - neko Main.n -name Haxe -html-doc html -xml-doc xml -icon haxe.png -out out -clean
-  - tar -czf out/haxe.tgz -C out Haxe.docset
-  - openssl sha1 out/haxe.tgz
+  - make
+
+deploy:
+  provider: script
+  script: make deploy
+  on:
+    branch: master
+  skip_cleanup: true

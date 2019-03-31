@@ -1,7 +1,6 @@
 .haxelib
 *.docset
-*.tgz
-out
+api
 html
 xml
 Main.n
