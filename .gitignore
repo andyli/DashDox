@@ -1,7 +1,2 @@
-*.docset
 *.tgz
-out
-xml
-html
-Main.n
-.haxelib
+*.xml
