@@ -8,21 +8,23 @@ branches:
 
 env:
   global:
-    - HAXE_PATH=$HOME/haxe_source
+    - HAXE_DOC_VERSION=3.4.7
+    - API_HAXE_ORG_PATH="$HOME/api.haxe.org"
 
 install:
   - haxelib install hxcpp
   - haxelib install hxjava
   - haxelib install hxcs
-  - git clone --depth 1 --branch $TRAVIS_HAXE_VERSION https://github.com/HaxeFoundation/haxe.git $HAXE_PATH
-  - pushd $HAXE_PATH
-  -   make install_dox
-  -   make package_doc
+  - haxelib install build.hxml --always
+  - git clone https://github.com/HaxeFoundation/api.haxe.org.git "$API_HAXE_ORG_PATH"
+  - pushd "$API_HAXE_ORG_PATH"
+  - cp -r "xml/$HAXE_DOC_VERSION" "$TRAVIS_BUILD_DIR/xml"
+  - git checkout gh-pages
+  - cp -r "v/$HAXE_DOC_VERSION" "$TRAVIS_BUILD_DIR/html"
   - popd
-  - unzip -o $HAXE_PATH/out/*_doc.zip -d api
 
 script:
   - haxe build.hxml
-  - neko Main.n -name Haxe -html-doc api -xml-doc $(haxelib path dox | head -1)/bin/xml -icon haxe.png -out out -clean
+  - neko Main.n -name Haxe -html-doc html -xml-doc xml -icon haxe.png -out out -clean
   - tar -czf out/haxe.tgz -C out Haxe.docset
   - openssl sha1 out/haxe.tgz
