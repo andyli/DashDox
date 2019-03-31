@@ -12,13 +12,14 @@ class Utils {
                 v;
         }
     }
-    static public function runCommand(cmd:String, args:Array<String>):Void {
+    static public function runCommand(cmd:String, args:Array<String>, exitIfError = true):Void {
         println('run: $cmd $args');
         switch(command(cmd, args)) {
             case 0:
                 //pass
             case exitCode:
-                exit(exitCode);
+                if (exitIfError)
+                    exit(exitCode);
         }
     }
     static public function commandOutput(cmd:String, args:Array<String>):String {
